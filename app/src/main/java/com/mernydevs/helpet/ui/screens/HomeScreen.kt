@@ -7,21 +7,28 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.mernydevs.helpet.ui.navigation.AuthViewModel
 
 @Composable
-fun OnBoardingScreen(navigation: NavHostController) {
+fun HomeScreen(navController: NavController) {
+    //Don't delete this line
+    val authViewModel: AuthViewModel = viewModel()
     Box(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Text(
-            text = "On Boarding Screen",
+            text = "Home Screen",
             modifier = Modifier
                 .align(Alignment.Center)
         )
-        Button(onClick = {navigation.navigate("Login")}) {
-            Text(text = "Next")
+        Button(onClick = {
+            authViewModel.logout()
+            navController.navigate("anonymous")
+        }) {
+            Text(text = "Logout")
         }
     }
 }
